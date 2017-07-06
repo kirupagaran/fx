@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="xgboost4j-0.7-jar-with-dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../suncorp/geek_forum/houseprices.predict/lib/xgboost4j-0.7-jar-with-dependencies.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../suncorp/geek_forum/houseprices.predict/lib/xgboost4j-spark-0.7-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
