@@ -1,40 +1,40 @@
 package au.com.anz;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-/**
- * Created by kirupa on 06/07/17.
- */
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import java.util.Map;
 
-/**
- * Unit test for simple App.
- */
-public class ForeignExchangeConverterTest extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public ForeignExchangeConverterTest( String testName )
-    {
-        super( testName );
+public class ForeignExchangeConverterTest {
+
+    ForeignExchangeConverter fx = new ForeignExchangeConverter();
+    Map<Object,String> rates = fx.getRates();
+    Map<Object,Map<Object,String>> crossMatrix = fx.createCrossViaMatrix();
+
+    //Unit Test for calculateExchangeRate()
+    @Test
+    public void calculateExchangeRate() {
+        Double actualExchangeRate = fx.getExchangeRate("AUD","USD",crossMatrix,rates);
+        Double expectedExchangeRate = 0.8371;
+        System.out.println("@Test getExchangeRate(): " + actualExchangeRate + " = " + expectedExchangeRate);
+        assertEquals(actualExchangeRate, expectedExchangeRate);
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( ForeignExchangeConverterTest.class );
+    //Unit Test for truncateDecimal()
+    @Test
+    public void truncateDecimal() {
+        String actualTruncatedValue = fx.truncateDecimal(fx.getExchangeRate("AUD","USD",crossMatrix,rates),2).toString();
+        String expectedTruncatedValue= "0.83";
+        System.out.println("@Test truncateDecimal(): " + actualTruncatedValue + " = " + expectedTruncatedValue);
+        assertEquals(actualTruncatedValue, expectedTruncatedValue);
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    //Unit Test for getCurrencyValue()
+    @Test
+    public void getCurrencyValue() {
+        Double actualCrossViaTestValue = fx.getCurrencyValue("GBP","CNY","USD",crossMatrix,rates);
+        Double expectedCrossViaTestValue = 9.67876345;
+        System.out.println("@Test getCurrencyValue(): " + actualCrossViaTestValue + " = " + expectedCrossViaTestValue);
+        assertEquals(actualCrossViaTestValue, expectedCrossViaTestValue);
     }
+
 }
